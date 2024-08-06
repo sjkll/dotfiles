@@ -1,0 +1,12 @@
+shell = "/opt/homebrew/bin/fish"
+
+[window]
+decorations = "Buttonless"
+dynamic_title = false
+option_as_alt = "Both"
+
+[font]
+size = 18
+
+[colors.primary]
+background = "#0f0f0f"
