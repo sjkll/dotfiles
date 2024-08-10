@@ -5,6 +5,9 @@ decorations = "Buttonless"
 dynamic_title = false
 option_as_alt = "Both"
 
+[mouse]
+hide_when_typing = true
+
 [font]
 size = 18
 
