@@ -1,2 +1,2 @@
-vim.cmd("colo industry")
+vim.cmd("colo wildcharm")
 return { }
