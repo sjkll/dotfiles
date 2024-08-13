@@ -13,3 +13,11 @@ size = 18
 
 [colors.primary]
 background = "#0f0f0f"
+
+[window.dimensions]
+columns = 0
+lines = 0
+
+[window.padding]
+x = 0
+y = 0
