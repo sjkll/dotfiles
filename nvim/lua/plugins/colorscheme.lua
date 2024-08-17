@@ -1,2 +1,6 @@
-vim.cmd("colo wildcharm")
-return {}
+return {
+  "craftzdog/solarized-osaka.nvim",
+  config = function()
+    vim.cmd("colo solarized-osaka")
+  end,
+}
