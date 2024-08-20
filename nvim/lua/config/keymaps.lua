@@ -31,8 +31,9 @@ utils.map("n", "<Right>", "")
 utils.map("n", "gb", "<Cmd>bn<CR>")
 utils.map("n", "gB", "<Cmd>bp<CR>")
 
-utils.map("n", "gx", utils.OpenLinkUnderCursor)
+utils.map("n", "gx", utils.open_link_under_cursor)
 
 utils.map("n", "<leader>t", function()
   utils.Test({})
 end)
+utils.map("n", "<leader>s", utils.switch_case)
