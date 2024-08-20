@@ -6,8 +6,6 @@ return {
     event = "InsertEnter",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp", -- cmp source for lsp
-      "hrsh7th/cmp-path", -- cmp source for file system
-      "hrsh7th/cmp-buffer",
     },
     opts = function()
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
@@ -24,9 +22,6 @@ return {
         },
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
-          { name = "path" },
-        }, {
-          { name = "buffer" },
         }),
         experimental = {
           ghost_text = {
