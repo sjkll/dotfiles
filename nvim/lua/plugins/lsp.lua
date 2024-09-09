@@ -79,7 +79,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     utils.map("n", "<leader>cl", vim.diagnostic.setqflist)
     utils.map("n", "<leader>ca", vim.lsp.buf.code_action)
     utils.map("n", "<leader>cd", vim.diagnostic.open_float)
-    -- utils.map("n", "<leader>cf", vim.lsp.buf.format)
     utils.map("n", "<leader>cr", vim.lsp.buf.rename)
     utils.map("n", "K", vim.lsp.buf.hover)
   end,
@@ -91,11 +90,11 @@ return {
     -- This event will simply after starting mason and mason.lspconfig
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
+      -- "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
       local lspconfig = require("lspconfig")
-      local cmp = require("cmp_nvim_lsp")
+      -- local cmp = require("cmp_nvim_lsp")
 
       lspconfig.util.on_setup = lspconfig.util.add_hook_after(lspconfig.util.on_setup, function(config)
         config.capabilities = vim.tbl_deep_extend("force", config.capabilities, cmp.default_capabilities())
