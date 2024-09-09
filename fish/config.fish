@@ -12,3 +12,6 @@ alias tree='exa --tree -I ".venv|__pycache__"'
 alias zet='cd ~/Notes'
 
 set -U fish_greeting
+
+# Created by `pipx` on 2024-09-03 17:15:04
+set PATH $PATH /Users/user/.local/bin
