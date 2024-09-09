@@ -115,8 +115,31 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 vim.api.nvim_create_autocmd("ColorScheme", {
   group = augroup("TransparentBackgroundColour"),
   callback = function()
-    -- vim.cmd("hi normal guibg=none")
+    vim.cmd("hi normal guibg=none")
   end,
+})
+
+-- Automatic toggling between hybrid and absolute line numbers
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
+  group = augroup("NumberToggle"),
+  pattern = "*",
+  callback = function()
+    if vim.o.number and vim.api.nvim_get_mode().mode ~= "i" then
+      vim.o.relativenumber = true
+    end
+  end,
+  desc = "Automatic toggling between hybrid and absolute line numbers",
+})
+
+vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
+  group = augroup("NumberToggled"),
+  pattern = "*",
+  callback = function()
+    if vim.o.number then
+      vim.o.relativenumber = false
+    end
+  end,
+  desc = "Automatic toggling between hybrid and absolute line numbers",
 })
 
 vim.api.nvim_create_user_command("Run", utils.Run, { nargs = "?", complete = "file" })
