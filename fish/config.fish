@@ -1,6 +1,8 @@
 set PATH /opt/homebrew/sbin $PATH
 set PATH /opt/homebrew/bin $PATH
 set PATH $PATH $HOME/.local/bin
+set -gx GOPATH $HOME/go
+set -gx PATH $PATH $GOPATH/bin
 
 set -gx GPG_TTY (tty)
 
