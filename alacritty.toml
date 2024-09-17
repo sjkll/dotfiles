@@ -5,6 +5,7 @@ decorations = "buttonless"
 option_as_alt = "OnlyLeft"
 dynamic_title = false
 dynamic_padding = false
+startup_mode = "Fullscreen"
 
 [mouse]
 hide_when_typing = true
@@ -14,7 +15,7 @@ blinking = "Off"
 shape = "Block"
 
 [font]
-size = 17
+size = 16
 builtin_box_drawing = false
 
 [font.normal]
