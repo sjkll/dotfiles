@@ -18,14 +18,14 @@ opt.pumblend = 10 -- Popup blend (opacity)
 -- opt.pumheight = 6 -- Maximum number of entries in a popup
 opt.sidescrolloff = 8 -- Columns of context
 opt.shortmess:append({ W = true, A = true, I = true, c = true, C = true })
-opt.signcolumn = "no" -- Always show the signcolumn, otherwise it would shift the text each time
+opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
 opt.showmode = false -- Dont show mode since we have a atusline
 opt.termguicolors = true -- True color support
 opt.spelllang = "en,ru"
 opt.winminwidth = 5 -- Minimum window width
 opt.wrap = false -- Disable line wrap
 opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
-opt.showtabline=0
+opt.showtabline = 2
 
 -- Menus
 opt.completeopt = "menuone,noselect,noinsert"
@@ -44,7 +44,7 @@ opt.smartcase = true -- Don't ignore case with capitals
 
 -- Split
 opt.splitkeep = "cursor"
-opt.splitbelow = true -- Put new windows below current
+opt.splitbelow = true -- Put new windows below curren
 opt.splitright = true -- Put new windows right of current
 
 -- Undo

@@ -30,10 +30,18 @@ utils.map("n", "<Right>", "")
 
 utils.map("n", "gb", "<Cmd>bn<CR>")
 utils.map("n", "gB", "<Cmd>bp<CR>")
+utils.map("n", "gt", "<Cmd>tabnext<CR>")
+utils.map("n", "gT", "<Cmd>tabprev<CR>")
 
 utils.map("n", "gx", utils.open_link_under_cursor)
 
-utils.map("n", "<leader>t", function()
-  utils.Test({})
-end)
 utils.map("n", "<leader>s", utils.switch_case)
+
+utils.map("t", "<Esc>", "<C-\\><C-n>")
+
+utils.map("n", "<leader>tn", utils.toggle)
+utils.map("n", "<leader>tr", utils.repl)
+utils.map("n", "<leader>ts", function()
+  utils.send_line(vim.fn.getline("."))
+end)
+utils.map("v", "<leader>ts", utils.send_selection)

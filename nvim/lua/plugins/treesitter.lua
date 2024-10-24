@@ -8,8 +8,9 @@ return {
       local configs = require("nvim-treesitter.configs")
 
       configs.setup({
-        ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "java", "python", "javascript", "html", "go" },
+        ensure_installed = { "lua", "vim", "vimdoc", "query", "python", "javascript", "html", "go" },
         highlight = { enable = true, use_languagetree = true },
+        auto_install = true,
         indent = {
           enable = true,
           disable = function(lang, buf)

@@ -5,6 +5,13 @@ return {
     keys = {
       {
         "<leader>cf",
+        function()
+          require("conform").format({
+            lsp_fallback = true,
+            async = false,
+            timeout_ms = 700,
+          })
+        end,
       },
     },
     config = function()
@@ -24,16 +31,16 @@ return {
           rust = { "rustfmt" },
           c = { "clang_format" },
           cpp = { "clang_format" },
+          json = { "jq" },
         },
         log_level = vim.log.levels.DEBUG,
       })
-      vim.keymap.set({ "n" }, "<leader>cf", function()
-        conform.format({
-          lsp_fallback = true,
-          async = false,
-          timeout_ms = 500,
-        })
-      end, { desc = "format file" })
+
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        callback = function()
+          require("conform").format()
+        end,
+      })
     end,
   },
 }

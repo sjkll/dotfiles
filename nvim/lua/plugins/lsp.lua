@@ -75,12 +75,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
     utils.map("n", "gd", require("telescope.builtin").lsp_definitions)
     utils.map("n", "gr", require("telescope.builtin").lsp_references)
     utils.map("n", "gi", require("telescope.builtin").lsp_implementations)
-    utils.map("n", "<leader>D", require("telescope.builtin").lsp_type_definitions)
-    utils.map("n", "<leader>cl", vim.diagnostic.setqflist)
+    utils.map("n", "gD", require("telescope.builtin").lsp_type_definitions)
     utils.map("n", "<leader>ca", vim.lsp.buf.code_action)
     utils.map("n", "<leader>cd", vim.diagnostic.open_float)
     utils.map("n", "<leader>cr", vim.lsp.buf.rename)
     utils.map("n", "K", vim.lsp.buf.hover)
+
   end,
 })
 
@@ -111,4 +111,5 @@ return {
       end
     end,
   },
+  -- {"fatih/vim-go", config=true}
 }

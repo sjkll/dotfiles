@@ -38,10 +38,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- A set of filetypes where just hitting "q" should exit the buffer/window
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("FasterQuit"),
-  pattern = { "help", "man", "lspinfo", "startuptime", "spectre_panel", "qf", "vim", "netrw" },
+  pattern = { "help", "man", "lspinfo", "startuptime", "spectre_panel", "qf", "vim", "netrw", "term", "toggleterm" },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
     vim.keymap.set("n", "q", "<Cmd>quit!<CR>", { silent = true, buffer = event.buf })
+    vim.keymap.set("n", "<Esc>", "<Cmd>quit!<CR>", { silent = true, buffer = event.buf })
   end,
   desc = "A set of filetypes where just hitting 'q' should exit the buffer/window",
 })
@@ -102,20 +103,12 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   end,
 })
 
--- Json format
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  group = augroup("JsonFormat"),
-  pattern = { "json" },
-  callback = function()
-    utils.map("n", "<leader>cf", "<Cmd>%!jq<CR>")
-  end,
-})
 
 -- Transparent
 vim.api.nvim_create_autocmd("ColorScheme", {
   group = augroup("TransparentBackgroundColour"),
   callback = function()
-    vim.cmd("hi normal guibg=none")
+    -- vim.cmd("hi normal guibg=none")
   end,
 })
 
@@ -142,7 +135,34 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave"
   desc = "Automatic toggling between hybrid and absolute line numbers",
 })
 
-vim.api.nvim_create_user_command("Run", utils.Run, { nargs = "?", complete = "file" })
+vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+  group = augroup("AutoTrouble"),
+  callback = function()
+    local ok, trouble = pcall(require, "trouble")
+    if ok then
+      vim.defer_fn(function()
+        vim.cmd("cclose")
+        trouble.open("quickfix")
+      end, 0)
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "TermEnter" }, {
+    callback = function()
+        for _, buffers in ipairs(vim.fn.getbufinfo()) do
+            local filetype = vim.api.nvim_buf_get_option(buffers.bufnr, "filetype")
+            if filetype == "toggleterm" then
+                vim.api.nvim_create_autocmd({ "BufWriteCmd", "FileWriteCmd", "FileAppendCmd" }, {
+                    buffer = buffers.bufnr,
+                    command = "q!",
+                })
+            end
+        end
+    end,
+})
+
 vim.api.nvim_create_user_command("LspEnableDiagnostic", utils.EnableDiagnostic, {})
 vim.api.nvim_create_user_command("LspDisableDiagnostic", utils.DisableDiagnostic, {})
+vim.api.nvim_create_user_command("Run", utils.Run, { nargs = "?", complete = "file" })
 vim.api.nvim_create_user_command("Test", utils.Test, { nargs = "?", complete = "file" })

@@ -1,0 +1,29 @@
+import = [
+"~/.config/alacritty/themes/zaibatsu.toml",
+# "~/.config/alacritty/themes/monokai.toml"
+]
+
+shell = "/opt/homebrew/bin/fish"
+
+[window]
+decorations = "buttonless"
+option_as_alt = "OnlyLeft"
+dynamic_title = false
+dynamic_padding = true
+startup_mode = "Fullscreen"
+
+
+[mouse]
+hide_when_typing = true
+
+[cursor.style]
+blinking = "Off"
+shape = "Block"
+
+[font]
+size = 14
+builtin_box_drawing = false
+
+[font.normal]
+# family = "DejaVuSansM Nerd Font Mono"
+family = "0xProto Nerd Font Mono"
