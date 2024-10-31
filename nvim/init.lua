@@ -1,4 +1,4 @@
-require("config.options")
-require("config.keymaps")
-require("config.autocmds")
-require("config.lazy")
+pcall(require, "options")
+pcall(require, "keymaps")
+pcall(require, "autocmds")
+pcall(require, "plugins")

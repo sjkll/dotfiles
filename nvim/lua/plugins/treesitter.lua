@@ -1,27 +1,34 @@
 return {
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
-    lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
-    config = function()
-      local configs = require("nvim-treesitter.configs")
+	"nvim-treesitter/nvim-treesitter",
+	dependencies = {
+		"nvim-treesitter/playground",
+	},
+	event = "UIEnter",
+	build = ":TSUpdate",
+	main = "nvim-treesitter.configs",
+	config = function()
+		local success, treesitter = pcall(require, "nvim-treesitter.configs")
+		if not success then
+			vim.notify("Failed to load plugin: treesitter")
+			return
+		end
 
-      configs.setup({
-        ensure_installed = { "lua", "vim", "vimdoc", "query", "python", "javascript", "html", "go" },
-        highlight = { enable = true, use_languagetree = true },
-        auto_install = true,
-        indent = {
-          enable = true,
-          disable = function(lang, buf)
-            local max_filesize = 100 * 1024 -- 100 KB
-            local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-            if ok and stats and stats.size > max_filesize then
-              return true
-            end
-          end,
-        },
-      })
-    end,
-  },
+		treesitter.setup({
+
+			ensure_installed = { "lua", "python" },
+			sync_install = true,
+			ignore_install = {},
+			highlight = {
+				enable = true,
+				disable = function(_, bufnr)
+					return vim.api.nvim_buf_line_count(bufnr) > 500
+				end,
+			},
+			indent = { enable = true },
+			fold = { enable = true },
+		})
+
+		vim.opt["foldmethod"] = "expr"
+		vim.opt["foldexpr"] = "nvim_treesitter#foldexpr()"
+	end,
 }
